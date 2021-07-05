@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+    AUC曲线绘制模块
+    @author 占炎根
+"""
+
 import torch
 import numpy as np
 from sklearn import metrics
