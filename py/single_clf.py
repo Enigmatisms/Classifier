@@ -79,6 +79,11 @@ class CNN(nn.Module):
         x = x.view(x.size(0), -1)
         return self.out(x)
 
+    # 只修改输出层
+    def transferFromModel(self, model_dict):
+        pass
+        
+
 if __name__ == "__main__":
     torch.set_default_tensor_type(torch.FloatTensor)
     parser = argparse.ArgumentParser()
@@ -127,10 +132,10 @@ if __name__ == "__main__":
 
     if use_cnn:
         net = CNN(class_num)
-        path = '../models/cnn_best_model.pth'
+        path = '../models/cnn_best_model_%d.pth'%(class_num)
     else:
         net = ResNet(1, class_num, 3)
-        path = '../models/resnet_best_model.pth'
+        path = '../models/resnet_best_model%d.pth'%(class_num)
     opt = optim.Adam(net.parameters(), lr = lrate)      
     sch = optim.lr_scheduler.ExponentialLR(opt, 0.9997, -1)
     loss_func = nn.CrossEntropyLoss()                   
