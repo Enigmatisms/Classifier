@@ -11,15 +11,15 @@ class CNN(nn.Module):
         super().__init__()
         self.conv1 = nn.Sequential(     
             nn.Conv2d(1, 8, 3, padding = 1),
-            nn.Dropout2d(0.2, True),
+            nn.BatchNorm2d(8),
             nn.ReLU(True),                             
-            nn.MaxPool2d(2)                       
+            nn.AvgPool2d(2)                       
         )       # out (n, 6, 32, 32)
         self.conv2 = nn.Sequential(     
             nn.Conv2d(8, 16, 5, padding = 2),
-            nn.Dropout2d(0.2, True),
+            nn.BatchNorm2d(16),
             nn.ReLU(True),
-            nn.MaxPool2d(2)
+            nn.AvgPool2d(2)
         )       # out (n, 16, 16, 16)
         self.conv3 = nn.Sequential(
             nn.Conv2d(16, 64, 3, padding = 1),
@@ -36,9 +36,7 @@ class CNN(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear(1024, 256),
             nn.ReLU(True),
-            nn.Dropout(0.2),
             nn.Linear(256, 64),
-            nn.Dropout(0.2),
             nn.Sigmoid(),
             nn.Linear(64, class_out),
         )

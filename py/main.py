@@ -54,9 +54,9 @@ if __name__ == "__main__":
     path_prefix = "cnn"
 
     tf = transforms.Compose([
-        transforms.RandomHorizontalFlip(0.5),
-        transforms.RandomVerticalFlip(0.5),
-        transforms.RandomRotation(degrees=7, expand=False, fill=None),
+        # transforms.RandomHorizontalFlip(0.5),
+        # transforms.RandomVerticalFlip(0.5),
+        # transforms.RandomRotation(degrees=7, expand=False, fill=None),
         transforms.Grayscale(),
         transforms.ToTensor(),
     ])
@@ -139,14 +139,14 @@ if __name__ == "__main__":
             opt.load_state_dict(opt_dict) 
 
     net = net.cuda()                                          
-    for i in range(epochs):    
+    for i in range(epochs):  
+        if i: random.shuffle(train_raw)
         for k in range(batch_num):
             samples = train_raw[k * batch_size : (k + 1) * batch_size]
             bx, by = makeBatch(samples)
             _bx = bx.cuda()
             _by = by.cuda()
-            out = net(_bx)  
-
+            out = net(_bx)
             loss = loss_func(out, _by)                  
             opt.zero_grad()                             
             loss.backward()
@@ -174,9 +174,9 @@ if __name__ == "__main__":
                 i, batch_cnt, batch_num, loss.data.item(), acc, train_acc, sch.get_last_lr()[-1]
             ))
             auc = plotter.saveAucFig(net, batch_cnt)
-            writer.add_scalar('Eval/Total Loss', loss.data.item(), batch_cnt)
-            writer.add_scalar('Eval/Acc', acc, batch_cnt)
-            writer.add_scalar('Eval/Train acc', train_acc, batch_cnt)
+            writer.add_scalar('Eval/Total_Loss', loss.data.item(), batch_cnt)
+            writer.add_scalar('Eval/Test Acc', acc, batch_cnt)
+            writer.add_scalar('Eval/Train_acc', train_acc, batch_cnt)
             writer.add_scalar('Eval/AUC', auc, batch_cnt)
             net.train()
     print("Training completed.")
