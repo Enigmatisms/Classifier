@@ -74,6 +74,11 @@ python .\main.py -c -t --epochs=25 --class_num=6
   - **<u>`main.py`: Executable file for training</u>**
   - `ResNet.py`: ResNet model
   - `utils.py`: Utility functions like image loader
+  - `GoogLeNet.py` LeNet implementation
+  - `ResCNN.py` ResNet + CNN structure
+  - `svm_gbdt.py` SVM + Gradient Boosting Tree implementation.
+- `matlab`: matlab .m files for data transformation implementation.
+  - `dataset1_process.m` / `dataset2_process.m`: Data pre-process.
 
 ---
 

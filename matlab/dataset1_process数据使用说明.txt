@@ -1,0 +1,7 @@
+各数据集中有三个变量xset label idlist，其中idlist中有十个元素，表示xset和label中从idlist[i]到idlist[i+1]个元素是第i个分类。
+注意，xset中各个分类的图像数据并不能和文件夹中的文件名排序一致。若需要找xset中第i个元素到底对应哪个真实图像再来联系我。
+python读取数据方法：
+import h5py
+xset=h5py.File('trainset1.mat','r')['xset'][()]
+label=h5py.File('trainset1.mat','r')['label'][()]
+idlist=h5py.File('trainset1.mat','r')['idlist'][()]

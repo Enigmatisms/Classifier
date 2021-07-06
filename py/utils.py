@@ -1,3 +1,8 @@
+#-*-coding:utf-8-*-
+"""
+    一些常用的函数，比如数据集梳理
+    @author 何千越
+"""
 import torch
 from CNN import CNN
 from torchvision import datasets                    
